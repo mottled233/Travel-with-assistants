@@ -1,0 +1,58 @@
+<div class="center">
+  <p id="test-ele"></p>
+  <%= image_tag get_static_map(@longitude,@latitude), id: :map, alt: "地图"%>
+</div>
+<div class="center">
+  <%= link_to "left", "", id: :left, class:"btn blue direction inline-block", remote: true%>
+  <div class="vertical inline-block">
+    <%= link_to "up", "", id: :up, class:"btn blue direction block", remote: true%>
+    <%= link_to "down", "", id: :down, class:"btn blue direction block", remote: true%>
+  </div>
+  <%= link_to "right", "", id: :right, class:"btn blue direction inline-block", remote: true%>
+  
+</div>
+<div class="center">
+  <a id="my_pos" class="btn">跳转到我的位置</a>
+</div>
+<script>
+  function updateMap(img_url){
+    $("#map").attr("src",img_url);
+  }
+
+  $(".direction").click(function(){
+    var id = $(this).attr('id');
+    
+  });
+  
+  $("#my_pos").click(function(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      alert("该浏览器不支持定位功能！");
+    }
+  });
+  
+  function showPosition(position) {
+    var url = "/static_maps/" + position.coords.longitude + "/" + position.coords.latitude;
+    $.get(url,function(data,status){
+      alert("Data: " + data + "\nStatus: " + status);
+    });
+  }
+  function showError(error) {
+    switch (error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "用户拒绝对获取地理位置的请求。";
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "位置信息是不可用的。";
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "请求用户地理位置超时。";
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "未知错误。";
+      break;
+    }
+  }
+  getLocation();
+</script>
