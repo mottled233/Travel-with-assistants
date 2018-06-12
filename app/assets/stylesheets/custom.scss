@@ -54,10 +54,107 @@ color: #fff;
 text-decoration: none;
 }
 
+.pointer-cursor{
+  cursor:pointer;
+}
+
 .inline-block{
   display: inline-block;
 }
 
 .block{
   display: block;
+}
+
+.drop-control{
+  
+}
+
+.drop-title{
+  padding: 10px 0;
+  font-size: 1.2em;
+  padding-left:15px;
+  border-bottom: 1px solid grey;
+}
+
+.drop-title:hover{
+  background-color: #060606;
+  
+}
+
+.map-content{
+  background:#e6e6e6;
+  border: 2px solid grey;
+  margin-left: 10px;
+}
+
+.map-content h2{
+  font-size:2em;
+  color:#000;
+  margin-bottom:0;
+}
+
+.map-content hr{
+  font-size:2em;
+  border-color:#000;
+}
+
+.map-content .direction{
+  background-color: darkcyan;
+  color: azure;
+}
+
+.map-content .zoom{
+  margin: 0 20px;
+  background-color: darkseagreen;
+  color: snow;
+}
+
+.map-content #my-pos{
+  float: right;
+  background-color: darkseagreen;
+  color: snow;
+}
+
+.left-side{
+  border: 2px solid grey;
+  background-color: #1b2a35;
+  color: #eee;
+}
+
+.left-side .side-control{
+  padding: 10px 0;
+}
+
+.left-side .offset-bar{
+  height:100px;
+
+}
+
+.left-side input{
+  color: #000;
+}
+
+.left-side button{
+  color: snow;
+  background-color: #578ebd
+}
+
+.info-content{
+  background:#e6e6e6;
+  border: 2px solid grey;
+  margin-left: 10px;
+  margin-top: 20px;
+  height: 200px;
+}
+
+.info-content h2{
+  font-size:2em;
+  color:#000;
+  margin-bottom:0;
+}
+
+.info-content hr{
+  font-size:2em;
+  border-color:#000;
 }

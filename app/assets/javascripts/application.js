@@ -14,8 +14,9 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-// $("#change").click(change);
 
-// function change(){
-//   $("#map").src="http://api.map.baidu.com/staticimage/v2?center=117,39&height=600&width=800&output=json&ak=w025eBzN2vPrdO4EAlm9HBsrYMWItR9N";
-// }
+$(document).ready(function(){
+  $(".drop-title").click(function(){
+    $(this).parent().children(".drop-body").slideToggle();
+  });
+});
