@@ -1,4 +1,8 @@
 module ApplicationHelper
+  AK = "w025eBzN2vPrdO4EAlm9HBsrYMWItR9N"
+  Weather_AK = "df8ab8002b164009a46cd496d27d3833"
+  Attraction_AK = "48c79db4d9f94dc8a0c79e2e1834daee"
+  Attraction_ID = "67601"
   
   def urlEncoding url
     puts url
@@ -21,8 +25,8 @@ module ApplicationHelper
   def get_static_map(longitude=116.403874, latitude=39.914888, width=800, height=600)
     url = "https://api.map.baidu.com/staticimage/v2?center=#{longitude},#{latitude}"
     url += "&height=#{height}&width=#{width}&output=json"
-    ak = "w025eBzN2vPrdO4EAlm9HBsrYMWItR9N"
-    url += "&ak=#{ak}"
+    
+    url += "&ak=#{AK}"
     url = urlEncoding url
     puts url
     url = URI.parse(url)

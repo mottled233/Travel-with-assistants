@@ -19,4 +19,13 @@ $(document).ready(function(){
   $(".drop-title").click(function(){
     $(this).parent().children(".drop-body").slideToggle();
   });
+
+  $(".min-height-control").each(function(){
+    var controls = $(this);
+    if(controls.height()<controls.attr("data-min-height")){
+      controls.height(controls.attr("data-min-height"));
+    }
+  });
+  
+  $(".first-hidden").hide();
 });

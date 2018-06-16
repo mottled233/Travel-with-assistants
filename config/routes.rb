@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
-  get '/home', to: "static_pages#home"
-  get '/map', to: "static_pages#map", as: :map
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   root 'static_pages#home'
   
+
+  get '/home', to: "static_pages#home"
+  get '/map', to: "static_pages#map", as: :map
+  
+  get '/city/:cityname', to: "city#show", as: :city
   get '/static_maps/:longitude/:latitude', longitude: /[^\/]+/, latitude: /[^\/]+/, to: 'static_maps#show', as: :static_maps, defaults: { longitude:116.403874, latitude:39.914888 }
+  get '/weather/:cityname', to: "weather#show", as: :weather
+  get '/attractions/:attraction', to: "attractions#show", as: :attraction
+  
   
   resources :users
   get '/login', to: 'sessions#new'

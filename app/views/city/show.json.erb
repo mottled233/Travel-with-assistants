@@ -1,0 +1,24 @@
+{
+  "status": <%= @status%>,
+  "map":{
+      "lat": <%= @center[:lat]%>,
+      "lng": <%= @center[:lng]%>,
+      "width": <%= @width%>,
+      "height": <%= @height%>,
+      "zoom": <%= @zoom %>,
+      "markers": "<%= @marker%>"
+  },
+  "total": <%=@count%>,
+  "attractions":[
+    <% @locations.each_with_index do |location, index|%>
+      {
+        "name":"<%= location[:name]%>",
+        "lat": <%= location[:lat]%>,
+        "lng": <%= location[:lng]%>
+      }
+      <% unless index == @locations.size-1%>
+       ,
+      <% end %>
+    <% end %>
+  ]
+}

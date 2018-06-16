@@ -66,6 +66,10 @@ text-decoration: none;
   display: block;
 }
 
+.pointer{
+  cursor: pointer;
+}
+
 .drop-control{
   
 }
@@ -145,7 +149,6 @@ text-decoration: none;
   border: 2px solid grey;
   margin-left: 10px;
   margin-top: 20px;
-  height: 200px;
 }
 
 .info-content h2{

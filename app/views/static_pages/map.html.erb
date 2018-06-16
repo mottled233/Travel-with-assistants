@@ -29,6 +29,22 @@
           </div>
         
       </div>
+      <div class="drop-control" id="city_to_go">
+          <div class="drop-title pointer-cursor">
+            目标城市
+          </div>
+          <div class="drop-body">
+            <div class="center side-control">
+              目标城市:
+              <input id="dist_city"/>
+            </div>
+            
+            <div class="center side-control">
+              <button id="city_go" class="btn blue">查看</button>
+            </div>
+          </div>
+        
+      </div>
       
     </div>
   </div>
@@ -64,21 +80,26 @@
       </div>
       
     </div>
-    <div class="info-content">
+    <div class="info-content" style="height:auto">
       <div class="row center">
         <h2>信息面板</h2>
-        
       </div>
       <hr/>
+      <div class="row" style="margin-left:20px">
+        <div style="margin-left:20px" class="first-hidden col-sm-5" id="attractions"></div>
+        <div class="inline-block first-hidden col-sm-6" id= "weathers"></div>
+      </div>
+      <div style="margin-left:20px">
+        <div class="inline-block first-hidden" id= "descriptions"></div>
+      </div>
     </div>
     <div style="padding-bottom:100px"></div>
   </div>
 </div>
-<input type="hidden" id="now_longitude"></input>
-<input type="hidden" id="now_latitude"></input>
-<input type="hidden" id="now_height"></input>
-<input type="hidden" id="now_width"></input>
-<input type="hidden" id="now_zoom"></input>
-<script>
+<div class="allmap" id="allmap"></div>
+<input type="hidden" id="now_longitude" value="116.403874"></input>
+<input type="hidden" id="now_latitude" value="39.914888"></input>
+<input type="hidden" id="now_height" value="600"></input>
+<input type="hidden" id="now_width" value="800"></input>
+<input type="hidden" id="now_zoom" value="11"></input>
 
-</script>

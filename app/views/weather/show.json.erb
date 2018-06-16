@@ -1,0 +1,36 @@
+{
+  "status" : <%= @status%>,
+  "city":
+  {
+    "nation": "<%=@city[:nation]%>",
+    "province": "<%=@city[:province]%>",
+    "city": "<%= @city[:city]%>"
+  },
+  "daily_weather":[
+    <% @daily.each_with_index do |day, index|%>
+      {
+        "date":
+        {
+          "year": <%= day[:date][:year] %>,
+          "month": <%= day[:date][:month] %>,
+          "day": <%= day[:date][:day] %>
+        },
+        "weather":
+        {
+          "day_weather": "<%= day[:weather][:day_weather] %>",
+          "night_weather": "<%= day[:weather][:night_weather] %>",
+          "max_temp": <%= day[:weather][:max_temp] %>,
+          "min_temp": <%= day[:weather][:min_temp] %>,
+          "wind_direction": "<%= day[:weather][:wind_direction] %>",
+          "wind_level": "<%= day[:weather][:wind_level] %>"
+        }
+      }
+      
+      <% if index!=@daily.size-1 %>
+        ,
+      <% end %>
+    <% end %>
+  ]
+  
+  
+}
