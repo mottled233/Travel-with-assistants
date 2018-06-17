@@ -1,5 +1,6 @@
 module ApplicationHelper
   AK = "w025eBzN2vPrdO4EAlm9HBsrYMWItR9N"
+  InterestPoints_table = "190670"
   Weather_AK = "df8ab8002b164009a46cd496d27d3833"
   Attraction_AK = "48c79db4d9f94dc8a0c79e2e1834daee"
   Attraction_ID = "67601"

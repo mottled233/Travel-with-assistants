@@ -139,6 +139,12 @@ text-decoration: none;
   color: #000;
 }
 
+.left-side .form-control{
+  width: 60%;
+  display:inline-block;
+  margin-left:10px;
+}
+
 .left-side button{
   color: snow;
   background-color: #578ebd
@@ -160,4 +166,20 @@ text-decoration: none;
 .info-content hr{
   font-size:2em;
   border-color:#000;
+}
+
+.poi-body{
+  font-size: 1.2em;
+  margin-left: 20px;
+  display: block;
+}
+
+.poi-body a{
+  color: white;
+  padding-bottom:5px;
+  
+}
+
+.poi-jump{
+  padding-left:25px;
 }

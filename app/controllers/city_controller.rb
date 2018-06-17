@@ -6,9 +6,9 @@ class CityController < ApplicationController
   
   def show
     city = params[:cityname]
-    
+    page = params[:page].to_i - 1 || 0
     begin
-      url = URI.parse(URI::escape("http://api.map.baidu.com/place/v2/search?query=景点&region=#{city}&output=json&ak=w025eBzN2vPrdO4EAlm9HBsrYMWItR9N"))
+      url = URI.parse(URI::escape("http://api.map.baidu.com/place/v2/search?query=景点&region=#{city}&page_size=9&page_num=#{page}&output=json&ak=#{ApplicationHelper::AK}"))
       res = Net::HTTP.get_response(url)
       res = JSON::parse(res.body)
     rescue SocketError => e

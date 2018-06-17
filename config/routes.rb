@@ -13,7 +13,13 @@ Rails.application.routes.draw do
   get '/attractions/:attraction', to: "attractions#show", as: :attraction
   
   
-  resources :users
+  resources :users do
+    resources :interest_points
+    get "interest_points_create", to:"interest_points#create"
+    get "interest_points_delete/:id", to:"interest_points#destroy", as:"interest_points_delete"
+  end
+  
+  
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/reg', to: 'users#new'

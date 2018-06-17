@@ -14,12 +14,15 @@
   <body>
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-      <%= link_to "map app", '#', id: "logo" %>
+      <%= link_to "游必有方", map_path, id: "logo" %>
         <nav>
         <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Home", home_path %></li>
-          <li><%= link_to "Map", map_path %></li>
-          <li><%= link_to "Log in", login_path %></li>
+          <li><%= link_to "主页", map_path %></li>
+          <% unless log_in?%>
+            <li><%= link_to "登录", login_path %></li>
+          <% else %>
+            <li><%= link_to "欢迎，#{current_user.username}", login_path %></li>
+          <% end %>
         </ul>
         </nav>
       </div>

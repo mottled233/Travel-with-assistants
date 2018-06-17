@@ -1,0 +1,17 @@
+{
+  "interest_points":[
+    <% @interest_points.each_with_index do |point, index|%>
+      {
+      "geotable_id": <%= point.id %>,
+      "name": "<%= point.name %>",
+      "lat": <%= point.latitude %>,
+      "lng": <%= point.longitude %>,
+      "zoom": <%= point.zoom %>,
+      "user_id": <%= point.user_id%>
+      }
+      <% unless index==@interest_points.size-1%>
+        ,
+      <% end %>
+    <% end %>
+  ]
+}

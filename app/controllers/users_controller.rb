@@ -9,12 +9,11 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_param)
-    @user.user_role = USER_ROLE_STUDENT
     if @user.save
       flash[:success] = "欢迎, #{@user.username}!"
       log_in @user
       
-      redirect_to user_url(@user)
+      redirect_to map_path
     else
       render 'new'
     end
@@ -36,6 +35,6 @@ class UsersController < ApplicationController
   
   private
   def user_param
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :phone_number, :user_role, :nickname)
+    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 end

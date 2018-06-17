@@ -17,11 +17,11 @@
             </div>
             <div class="center side-control">
               经度:
-              <input type="number" id="longitude"/>
+              <input type="number" class="form-control" id="longitude"/>
             </div>
             <div class="center side-control">
               纬度:
-              <input type="number" id="latitude"/>
+              <input type="number" class="form-control" id="latitude"/>
             </div>
             <div class="center side-control">
               <button id="jump_to" class="btn blue">跳转</button>
@@ -36,7 +36,7 @@
           <div class="drop-body">
             <div class="center side-control">
               目标城市:
-              <input id="dist_city"/>
+              <input id="dist_city"  class="form-control"/>
             </div>
             
             <div class="center side-control">
@@ -45,6 +45,25 @@
           </div>
         
       </div>
+      <% if log_in? %>
+      <div class="drop-control" id="interest_points">
+          <div class="drop-title pointer-cursor">
+            收藏的点
+          </div>
+          <div class="drop-body poi-body">
+            收藏当前点
+            <div class="center side-control">
+              命名:
+              <input id="poi_naming"  class="form-control"/>
+              <button id="poi_add" class="btn blue">添加</button>
+            </div>
+            <div id="interest_points_content">
+              
+            </div>
+            
+          </div>
+      </div>
+      <% end %>
       
     </div>
   </div>
@@ -102,4 +121,7 @@
 <input type="hidden" id="now_height" value="600"></input>
 <input type="hidden" id="now_width" value="800"></input>
 <input type="hidden" id="now_zoom" value="11"></input>
+<% if log_in? %>
+  <input type="hidden" id="user_id" value="<%= current_user.id%>"></input>
+<% end %>
 

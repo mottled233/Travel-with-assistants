@@ -66,7 +66,7 @@ $(document).ready(function(){
     return re.test(str);
   }
   
-  zoom_scale= [0,  0,0,0,0,0,0,0,0,0,0,0,0,0,[1.428571e-04,1.190476e-04], [7.272727e-05,5.714286e-05], [3.614458e-05, 2.884615e-05], [1.798561e-05,1.492537e-05], [9.009009e-06,7.246376e-06]];
+  zoom_scale= [0,  0,0,0,0,0,0,0,0,0,0,[0.001156626,0.0009230769],0,0,[1.428571e-04,1.190476e-04], [7.272727e-05,5.714286e-05], [3.614458e-05, 2.884615e-05], [1.798561e-05,1.492537e-05], [9.009009e-06,7.246376e-06]];
   $("#map").click(function(e){ 
       var zoom = parseInt($("#now_zoom").val());
       var longitude = parseFloat($("#now_longitude").val());
@@ -153,9 +153,15 @@ $(document).ready(function(){
     
   }
   
-  $("#city_go").click(function(){
-    var city_to_go =$("#dist_city").val();
-    var url = "/city/"+city_to_go;
+  $("#city_go").click(getCityAttraction);
+  
+  function getCityAttraction(e,city_to_go, page){
+    if(city_to_go==null){
+      city_to_go =$("#dist_city").val();
+    }
+    if(page==null)
+      page=1
+    var url = "/city/"+city_to_go+"?page="+page;
     $.get(url,function(data,status){
       clearAttractions();
       var map = data["map"];
@@ -180,15 +186,24 @@ $(document).ready(function(){
         jump_to_attraction(lng,lat,14,city,name);
       });
       if(size>0){
+        if(page>1)
+          var prev = "<a class=\"attraction_prev pointer block\">上一页</a>"
         var clear = "<a class=\"attraction_clear pointer block\">取消检索</a>"
-        attraction.append(clear);
+        var next = "<a class=\"attraction_next pointer block\">下一页</a>"
+        attraction.append(prev,clear,next);
         $(".attraction_clear").click(clearAttractions);
+        $(".attraction_prev").click(function(){
+          getCityAttraction(1,city_to_go,page-1);
+        })
+        $(".attraction_next").click(function(){
+          getCityAttraction(1,city_to_go,page+1);
+        })
         $("#attractions").slideDown();
       }else{
         alert("无法查询到该城市景点信息。");
       }
     });
-  });
+  }
   
   function clearWeatherAndDetail(){
     $("#weathers").slideUp();
@@ -241,7 +256,75 @@ $(document).ready(function(){
   }
   
   
+  //poi
+  function refreshPOI(){
+    var content = $("#interest_points_content");
+    content.html("");
+    var user_id = $("#user_id").val();
+    url = "/users/"+user_id+"/interest_points";
+    $.get(url,function(data,status){
+      pois = data["interest_points"];
+      for(var i = 0; i < pois.length; i++){
+        var poi_content = $("<div></div>").attr("geotable_id", pois[i]["geotable_id"]);
+        poi_content.attr("name", pois[i]["name"]).attr("lat", pois[i]["lat"]).attr("lng", pois[i]["lng"]);
+        poi_content.attr("zoom", pois[i]["zoom"]).attr("user_id", pois[i]["user_id"]);
+        poi_content.addClass("poi-div row");
+        var button = $("<a></a>").addClass("poi-jump pointer col-sm-8").text(i+1+"、"+pois[i]["name"]);
+        var delete_button = $("<a></a>").addClass("poi-delete pointer col-sm-4").text("删除")
+        poi_content.append(button,delete_button);
+        content.append(poi_content);
+      }
+      $(".poi-delete").click(delete_poi);
+      $(".poi-jump").click(poi_jump);
+    });
+  }
+  
+  function delete_poi(){
+    
+    var id = $(this).parent().attr("geotable_id");
+    var user_id = $(this).parent().attr("user_id");
+    var url = url = "/users/"+user_id+"/interest_points_delete/"+id;
+    $.get(url,function(data,status){
+      if(data["status"]==1)
+        refreshPOI();
+      else
+        alert("删除出错");
+    });
+  }
+  
+  function poi_jump(){
+    
+    var lat = $(this).parent().attr("lat");
+    var lng = $(this).parent().attr("lng");
+    var zoom = $(this).parent().attr("zoom");
+    
+    getNewMap(lng,lat,zoom);
+  }
+  
+  
+  $("#poi_add").click(function(){
+    var longitude = parseFloat($("#now_longitude").val());
+    var latitude = parseFloat($("#now_latitude").val());
+    var zoom = parseInt($("#now_zoom").val());
+    var user_id = $("#user_id").val();
+    var name = $("#poi_naming").val();
+    if(isNull(name))return;
+    var url = url = "/users/"+user_id+"/interest_points";
+    var data = {longitude: longitude, latitude: latitude, zoom: zoom, user_id: user_id, name: name};
+    $.post(url, data, function(data, status){
+      if(data["status"]==1){
+        alert("添加成功");
+        refreshPOI();
+      }
+      else
+        alert("添加出错");
+    });
+    
+  });
+  
+  
   // when ready
+  refreshPOI();
   if (navigator.geolocation) {
     
      navigator.geolocation.getCurrentPosition(showPosition, showError);
